@@ -31,16 +31,6 @@ function App() {
 
   console.log("TODOリスト:", todoList);
 
-  const inCompletedList = todoList.filter((todo) => {
-    return !todo.done;
-  });
-
-  console.log("未完了TODOリスト:", inCompletedList);
-
-  const completedList = todoList.filter((todo) => {
-    return todo.done; 
-  });
-
   return (
     <Container centerContent p={{ base: "4", md: "6" }} maxWidth="31xl">
       <TodoTitle title="TODO進捗管理" as="h1"
@@ -53,11 +43,7 @@ function App() {
 
       <TodoList 
       fontSize={{base:"xl",md:"2xl"}} mt="5"
-      title="未完了TODOリスト" as="h2" todoList={inCompletedList} toggleTodoListItemStatus={toggleTodoListItemStatus} deleteTodoListItem={deleteTodoListItem} />
-
-      <TodoList 
-      fontSize={{base:"xl",md:"2xl"}} mt="5"
-      title="完了TODOリスト" as="h2" todoList={completedList} toggleTodoListItemStatus={toggleTodoListItemStatus} deleteTodoListItem={deleteTodoListItem} />
+      title="TODOリスト" as="h2" todoList={todoList} toggleTodoListItemStatus={toggleTodoListItemStatus} deleteTodoListItem={deleteTodoListItem} />
     </Container>
   );
 }
