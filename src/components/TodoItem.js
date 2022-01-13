@@ -1,42 +1,76 @@
-import { ListItem, Text, Flex, Button, IconButton, Checkbox, Box, Spacer, Center } from "@chakra-ui/react";
+import { ListItem, Text, Flex, Button, IconButton, Checkbox, Box, Spacer, Center, Textarea } from "@chakra-ui/react";
 
-import { DeleteIcon } from "@chakra-ui/icons";
+import { DeleteIcon, DownloadIcon } from "@chakra-ui/icons";
 
-export const TodoItem = ({ todo, toggleTodoListItemStatus, deleteTodoListItem }) => {
-  
+import { useState, useRef } from "react";
+
+export const TodoItem = ({ todo, toggleTodoListItemStatus, deleteTodoListItem, updateTodoContent }) => {
+
+  const [editable, setEditable] = useState(false);
+
+  const [text, setText] = useState(todo.content);
+
   const handleToggleTodoListItemStatus = () => toggleTodoListItemStatus(todo.id, todo.done);
 
   const handleDeleteTodoListItem = () => deleteTodoListItem(todo.id);
 
-  const onclickSample = () => {
-    console.log("click!");
+  const handleSetEditable = () => setEditable((prev) => !prev);
+
+  const inputEl = useRef(todo.content);
+
+  const handleUpdateTodoContent = () => {
+    updateTodoContent(todo.id, inputEl.current.value);
+    setEditable(false);
   };
+
+  const handleChangeText = (e) => setText(e.target.value);
 
   return (
     <ListItem
-      borderWidth="1px"
       p="1"
-      mt="2"
+      mt="1"
       bg="white"
-      borderRadius="md"
-      borderColor="gray.300">
+      >
       <Flex align="center" justify="flex-end">
-        <Center>
-          <Checkbox ml="2" onChange={handleToggleTodoListItemStatus} isChecked={todo.done} />
+        <Checkbox ml="2" onChange={handleToggleTodoListItemStatus} isChecked={todo.done} />
+        <Box w="1850px">
+        {editable ?
+          <Textarea
+            ml="3"
+            ref={inputEl}
+            value={text}
+            onChange={handleChangeText}
+            w="100%"
+            min-height="100%"
+            rows="1"
+            fontSize="lg"
+            paddingLeft="3px"
+          >
+          </Textarea> :
           <Text
             ml="3"
-            onClick={onclickSample} >
-            {todo.done ? <del>{todo.content}</del> : todo.content}
+            onClick={handleSetEditable} 
+            paddingLeft="4px"
+            >
+            {todo.done ? <del>{text}</del> : text}
           </Text>
-        </Center>
-        <Spacer />
-        <Box>
-          <IconButton
-            icon={<DeleteIcon />}
-            variant="unstyled"
-            aria-label="delete"
-            onClick={handleDeleteTodoListItem} />
+        }
         </Box>
+        <Spacer />
+        {editable &&
+          <Button
+            w="20"
+            h="8"
+            ml="5"
+            mt="1"
+            colorScheme="blue"
+            onClick={handleUpdateTodoContent} >保存</Button>
+        }
+        <IconButton
+          icon={<DeleteIcon />}
+          variant="unstyled"
+          aria-label="delete"
+          onClick={handleDeleteTodoListItem} />
       </Flex>
     </ListItem>
   )

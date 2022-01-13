@@ -3,7 +3,7 @@ import { TodoTitle } from "./TodoTitle";
 
 import { TodoItem } from "./TodoItem";
 
-export const TodoList = ({ todoList, toggleTodoListItemStatus, deleteTodoListItem, title, as , fontSize, mt}) => {
+export const TodoList = ({ todoList, toggleTodoListItemStatus, deleteTodoListItem, title, as , fontSize, mt, updateTodoContent}) => {
   return (
     <>
       {todoList.length !== 0 && (
@@ -15,7 +15,9 @@ export const TodoList = ({ todoList, toggleTodoListItemStatus, deleteTodoListIte
               key={todo.id} 
               todo={todo} 
               toggleTodoListItemStatus={toggleTodoListItemStatus} 
-              deleteTodoListItem={deleteTodoListItem} />
+              deleteTodoListItem={deleteTodoListItem} 
+              updateTodoContent={updateTodoContent}
+              />
             ))}
           </List>
         </>

@@ -25,6 +25,18 @@ export const useTodo = () => {
     });
   };
 
+  const updateTodoContent = (id, todoContent) => {
+    const todoItem = todoList.find((item) => item.id === id);
+    const newTodoItem = { ...todoItem, content: todoContent };
+
+    todoData.updateTodoData(id, newTodoItem).then((updatedTodo) => {
+      const newTodoList = todoList.map((item) =>
+        item.id !== updatedTodo.id ? item : updatedTodo
+      );
+      setTodoList(newTodoList);
+    });
+  };
+
   const addTodoListItem = (todoContent) => {
     const newTodoItem = {
       content: todoContent,
@@ -51,6 +63,7 @@ export const useTodo = () => {
     todoList,
     toggleTodoListItemStatus,
     addTodoListItem,
-    deleteTodoListItem
+    deleteTodoListItem,
+    updateTodoContent
   };
 };

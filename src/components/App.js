@@ -17,7 +17,8 @@ function App() {
     todoList,
     addTodoListItem,
     toggleTodoListItemStatus,
-    deleteTodoListItem
+    deleteTodoListItem,
+    updateTodoContent
   } = useTodo();
 
   const inputEl = useRef(null);
@@ -43,7 +44,12 @@ function App() {
 
       <TodoList 
       fontSize={{base:"xl",md:"2xl"}} mt="5"
-      title="TODOリスト" as="h2" todoList={todoList} toggleTodoListItemStatus={toggleTodoListItemStatus} deleteTodoListItem={deleteTodoListItem} />
+      title="TODOリスト" as="h2" 
+      todoList={todoList} 
+      toggleTodoListItemStatus={toggleTodoListItemStatus} 
+      deleteTodoListItem={deleteTodoListItem} 
+      updateTodoContent={updateTodoContent}
+      />
     </Container>
   );
 }
