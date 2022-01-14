@@ -8,8 +8,7 @@ export const TodoList = ({ todoList, toggleTodoListItemStatus, deleteTodoListIte
     <>
       {todoList.length !== 0 && (
         <>
-          <TodoTitle fontSize={fontSize} title={title} as={as} mt={mt} />
-          <List w="full">
+          <List w="full" mt="3">
             {todoList.map((todo) => (
               <TodoItem 
               key={todo.id} 

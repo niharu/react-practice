@@ -3,6 +3,9 @@ import { ListItem, Text, Flex, Button, IconButton, Checkbox, Box, Spacer, Center
 import { DeleteIcon, DownloadIcon } from "@chakra-ui/icons";
 
 import { useState, useRef } from "react";
+import { DeleteModal } from "./DeleteModal";
+
+import { useDisclosure } from "@chakra-ui/react"
 
 export const TodoItem = ({ todo, toggleTodoListItemStatus, deleteTodoListItem, updateTodoContent }) => {
 
@@ -24,6 +27,8 @@ export const TodoItem = ({ todo, toggleTodoListItemStatus, deleteTodoListItem, u
   };
 
   const handleChangeText = (e) => setText(e.target.value);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <ListItem
@@ -70,7 +75,10 @@ export const TodoItem = ({ todo, toggleTodoListItemStatus, deleteTodoListItem, u
           icon={<DeleteIcon />}
           variant="unstyled"
           aria-label="delete"
-          onClick={handleDeleteTodoListItem} />
+          onClick={onOpen}
+          />
+
+        <DeleteModal isOpen={isOpen} onClose={onClose} handleDeleteTodoListItem={handleDeleteTodoListItem}/>
       </Flex>
     </ListItem>
   )

@@ -33,8 +33,8 @@ function App() {
   console.log("TODOリスト:", todoList);
 
   return (
-    <Container centerContent p={{ base: "4", md: "6" }} maxWidth="31xl">
-      <TodoTitle title="TODO進捗管理" as="h1"
+    <Container centerContent p={{ base: "4", md: "6" }} maxWidth="3xl">
+      <TodoTitle title="TODOリスト" as="h1"
         fontSize={{ base: "2xl", md: "3xl" }}/>
 
       <TodoAdd 
@@ -43,7 +43,7 @@ function App() {
       inputEl={inputEl} handleAddTodoListItem={handleAddTodoListItem} buttonText="TODOを追加" />
 
       <TodoList 
-      fontSize={{base:"xl",md:"2xl"}} mt="5"
+      fontSize={{base:"xl",md:"2xl"}}
       title="TODOリスト" as="h2" 
       todoList={todoList} 
       toggleTodoListItemStatus={toggleTodoListItemStatus} 
