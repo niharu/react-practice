@@ -9,6 +9,8 @@ import { useDisclosure } from "@chakra-ui/react"
 
 export const TodoItem = ({ todo, toggleTodoListItemStatus, deleteTodoListItem, updateTodoContent }) => {
 
+  console.log("TodoItem.todo:", todo);
+
   const [editable, setEditable] = useState(false);
 
   const [text, setText] = useState(todo.content);

@@ -1,3 +1,4 @@
+import { doc } from "firebase/firestore";
 import { useState, useEffect } from "react";
 
 import { ulid } from "ulid";
@@ -8,28 +9,28 @@ export const useTodo = () => {
   const [todoList, setTodoList] = useState([]);
 
   useEffect(() => {
-    todoData.getAllTodosData().then((todo) => {
-      setTodoList([...todo].reverse());
+    todoData.getAllTodosDataFirebase().then((resultTodoList) => {
+      setTodoList([...resultTodoList].reverse());
     });
   }, []);
 
   const toggleTodoListItemStatus = (id, done) => {
-    const todoItem = todoList.find((item) => item.id === id);
-    const newTodoItem = { ...todoItem, done: !done };
+    const todo = todoList.find((todo) => todo.id === id);
+    const newTodoItem = {...todo, done: !done};
 
-    todoData.updateTodoData(id, newTodoItem).then((updatedTodo) => {
-      const newTodoList = todoList.map((item) =>
-        item.id !== updatedTodo.id ? item : updatedTodo
+    todoData.updateTodoDataFirebase(id, newTodoItem).then((updatedTodo) => {
+      const newTodoList = todoList.map((todo) =>
+        todo.id !== updatedTodo.id ? todo : updatedTodo
       );
       setTodoList(newTodoList);
     });
   };
 
   const updateTodoContent = (id, todoContent) => {
-    const todoItem = todoList.find((item) => item.id === id);
-    const newTodoItem = { ...todoItem, content: todoContent };
+    const doc = todoList.find((doc) => doc.id === id);
+    const newTodoItem = { ...doc, content: todoContent };
 
-    todoData.updateTodoData(id, newTodoItem).then((updatedTodo) => {
+    todoData.updateTodoDataFirebase(id, newTodoItem).then((updatedTodo) => {
       const newTodoList = todoList.map((item) =>
         item.id !== updatedTodo.id ? item : updatedTodo
       );
@@ -44,7 +45,7 @@ export const useTodo = () => {
       done: false
     };
 
-    return todoData.addTodoData(newTodoItem).then((addTodo) => {
+    return todoData.addTodoDataFirebase(newTodoItem).then((addTodo) => {
       setTodoList([addTodo, ...todoList]);
     });
   };

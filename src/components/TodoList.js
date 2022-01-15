@@ -12,7 +12,7 @@ export const TodoList = ({ todoList, toggleTodoListItemStatus, deleteTodoListIte
             {todoList.map((todo) => (
               <TodoItem 
               key={todo.id} 
-              todo={todo} 
+              todo={todo}
               toggleTodoListItemStatus={toggleTodoListItemStatus} 
               deleteTodoListItem={deleteTodoListItem} 
               updateTodoContent={updateTodoContent}

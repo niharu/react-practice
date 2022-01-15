@@ -12,7 +12,9 @@ import { TodoTitle } from "./TodoTitle";
 
 import { TodoList } from "./TodoList";
 
+
 function App() {
+
   const {
     todoList,
     addTodoListItem,
@@ -30,7 +32,7 @@ function App() {
     inputEl.current.value = "";
   };
 
-  console.log("TODOリスト:", todoList);
+  console.log("todoList:", todoList);
 
   return (
     <Container centerContent p={{ base: "4", md: "6" }} maxWidth="3xl">
