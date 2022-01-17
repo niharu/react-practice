@@ -1,22 +1,19 @@
-import { doc } from "firebase/firestore";
-import { useState, useEffect } from "react";
-
+import { useState } from "react";
 import { ulid } from "ulid";
-
 import * as todoData from "../api/todos";
 
 export const useTodo = () => {
   const [todoList, setTodoList] = useState([]);
 
-  useEffect(() => {
-    todoData.getAllTodosDataFirebase().then((resultTodoList) => {
+  const getTodoList = (user) => {
+    todoData.getAllTodosDataFirebase(user).then((resultTodoList) => {
       setTodoList([...resultTodoList].reverse());
     });
-  }, []);
+  }
 
   const toggleTodoListItemStatus = (id, done) => {
     const todo = todoList.find((todo) => todo.id === id);
-    const newTodoItem = {...todo, done: !done};
+    const newTodoItem = { ...todo, done: !done };
 
     todoData.updateTodoDataFirebase(id, newTodoItem).then((updatedTodo) => {
       const newTodoList = todoList.map((todo) =>
@@ -38,11 +35,12 @@ export const useTodo = () => {
     });
   };
 
-  const addTodoListItem = (todoContent) => {
+  const addTodoListItem = (todoContent, userId) => {
     const newTodoItem = {
       content: todoContent,
       id: ulid(),
-      done: false
+      done: false,
+      userId: userId
     };
 
     return todoData.addTodoDataFirebase(newTodoItem).then((addTodo) => {
@@ -62,6 +60,7 @@ export const useTodo = () => {
 
   return {
     todoList,
+    getTodoList,
     toggleTodoListItemStatus,
     addTodoListItem,
     deleteTodoListItem,
