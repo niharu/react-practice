@@ -1,4 +1,4 @@
-import { Text, Button, Flex } from "@chakra-ui/react";
+import { Text, Button, Flex, Center } from "@chakra-ui/react";
 
 import { useDisclosure } from "@chakra-ui/react"
 
@@ -35,8 +35,10 @@ export const Login = ({loading, isSignedIn, user}) => {
           {isSignedIn ?
             <>
               <Flex>
-                <Text>{user!==null && user.displayName}</Text>
-                <Button ml="3" colorScheme="blue" onClick={logout}>ログアウト</Button>
+                <Center>
+                  <Text>{user!==null && user.displayName}</Text>
+                  <Button ml="3" colorScheme="blue" onClick={logout}>ログアウト</Button>
+                </Center>
               </Flex>
             </>
             :
