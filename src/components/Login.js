@@ -35,7 +35,7 @@ export const Login = ({loading, isSignedIn, user}) => {
           {isSignedIn ?
             <>
               <Flex>
-                <Text>{user!==null && user.email}</Text>
+                <Text>{user!==null && user.displayName}</Text>
                 <Button ml="3" colorScheme="blue" onClick={logout}>ログアウト</Button>
               </Flex>
             </>
