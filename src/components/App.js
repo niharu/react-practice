@@ -41,7 +41,7 @@ function App() {
     <Container p={{ base: "4", md: "6" }} maxWidth="3xl">
       <Flex>
         <Box>
-          <TodoTitle title="TODOリスト" as="h1"
+          <TodoTitle title="Todoリスト" as="h1"
             fontSize={{ base: "2xl", md: "3xl" }} />
         </Box>
         <Spacer />
@@ -53,11 +53,11 @@ function App() {
       {isSignedIn &&
         <>
           <TodoAdd
-            placeholder="ADD TODO"
+            placeholder="Add Todo"
             leftIcon={<AddIcon />}
             inputEl={inputEl}
             handleAddTodoListItem={handleAddTodoListItem}
-            buttonText="TODOを追加" />
+            buttonText="Todoを追加" />
           <TodoList
             todoList={todoList}
             toggleTodoListItemStatus={toggleTodoListItemStatus}
