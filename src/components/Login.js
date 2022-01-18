@@ -4,9 +4,9 @@ import { useDisclosure } from "@chakra-ui/react"
 
 import { SignInScreen } from "./SignInScreen";
 
-import firebase from "firebase/compat/app";
-import 'firebase/compat/auth';
+import { firebase } from "firebase/compat/app";
 import { firebaseConfig } from "../config/config"
+import 'firebase/compat/auth';
 
 const uiConfig = {
   signInFlow: 'popup',
@@ -20,7 +20,7 @@ const uiConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-export const Login = ({loading, isSignedIn, user}) => {
+export const Login = ({ loading, isSignedIn, user }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const logout = () => {
@@ -36,7 +36,7 @@ export const Login = ({loading, isSignedIn, user}) => {
             <>
               <Flex>
                 <Center>
-                  <Text>{user!==null && user.displayName}</Text>
+                  <Text>{user !== null && user.displayName}</Text>
                   <Button ml="3" colorScheme="blue" onClick={logout}>ログアウト</Button>
                 </Center>
               </Flex>

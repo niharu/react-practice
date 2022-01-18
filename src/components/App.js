@@ -46,7 +46,7 @@ function App() {
         </Box>
         <Spacer />
         <Box>
-          <Login loading={loading} isSignedIn={isSignedIn} user={user}/>
+          <Login loading={loading} isSignedIn={isSignedIn} user={user} />
         </Box>
       </Flex>
 
@@ -59,8 +59,6 @@ function App() {
             handleAddTodoListItem={handleAddTodoListItem}
             buttonText="TODOを追加" />
           <TodoList
-            fontSize={{ base: "xl", md: "2xl" }}
-            title="TODOリスト" as="h2"
             todoList={todoList}
             toggleTodoListItemStatus={toggleTodoListItemStatus}
             deleteTodoListItem={deleteTodoListItem}

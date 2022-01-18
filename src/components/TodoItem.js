@@ -1,6 +1,6 @@
-import { ListItem, Text, Flex, Button, IconButton, Checkbox, Box, Spacer, Center, Textarea } from "@chakra-ui/react";
+import { ListItem, Text, Flex, Button, IconButton, Checkbox, Box, Spacer, Textarea } from "@chakra-ui/react";
 
-import { DeleteIcon, DownloadIcon } from "@chakra-ui/icons";
+import { DeleteIcon } from "@chakra-ui/icons";
 
 import { useState, useRef } from "react";
 import { DeleteModal } from "./DeleteModal";
@@ -35,31 +35,31 @@ export const TodoItem = ({ todo, toggleTodoListItemStatus, deleteTodoListItem, u
       p="1"
       mt="1"
       bg="white"
-      >
+    >
       <Flex align="center" justify="flex-end">
         <Checkbox ml="2" onChange={handleToggleTodoListItemStatus} isChecked={todo.done} />
         <Box w="1850px">
-        {editable ?
-          <Textarea
-            ml="3"
-            ref={inputEl}
-            value={text}
-            onChange={handleChangeText}
-            w="100%"
-            min-height="100%"
-            rows="1"
-            fontSize="lg"
-            paddingLeft="3px"
-          >
-          </Textarea> :
-          <Text
-            ml="3"
-            onClick={handleSetEditable} 
-            paddingLeft="4px"
+          {editable ?
+            <Textarea
+              ml="3"
+              ref={inputEl}
+              value={text}
+              onChange={handleChangeText}
+              w="100%"
+              min-height="100%"
+              rows="1"
+              fontSize="lg"
+              paddingLeft="3px"
             >
-            {todo.done ? <del>{text}</del> : text}
-          </Text>
-        }
+            </Textarea> :
+            <Text
+              ml="3"
+              onClick={handleSetEditable}
+              paddingLeft="4px"
+            >
+              {todo.done ? <del>{text}</del> : text}
+            </Text>
+          }
         </Box>
         <Spacer />
         {editable &&
@@ -76,9 +76,9 @@ export const TodoItem = ({ todo, toggleTodoListItemStatus, deleteTodoListItem, u
           variant="unstyled"
           aria-label="delete"
           onClick={onOpen}
-          />
+        />
 
-        <DeleteModal isOpen={isOpen} onClose={onClose} handleDeleteTodoListItem={handleDeleteTodoListItem}/>
+        <DeleteModal isOpen={isOpen} onClose={onClose} handleDeleteTodoListItem={handleDeleteTodoListItem} />
       </Flex>
     </ListItem>
   )
