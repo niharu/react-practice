@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { ulid } from "ulid";
 import * as todoData from "../api/todos";
 
 export const useTodo = () => {
   const [todoList, setTodoList] = useState([]);
 
-  const getTodoList = (user) => {
+  const getTodoList = useCallback((user) => {
     todoData.getAllTodosDataFirebase(user).then((resultTodoList) => {
       setTodoList([...resultTodoList].reverse());
     });
-  }
+  },[]);
 
   const toggleTodoListItemStatus = (id, done) => {
     const todo = todoList.find((todo) => todo.id === id);

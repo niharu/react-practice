@@ -25,8 +25,10 @@ function App() {
   const { loading, isSignedIn, user } = useAuthState();
 
   useEffect(() => {
-    getTodoList(user);
-  }, [user]);
+    if (user!==null) {
+      getTodoList(user);
+    }
+  }, [user, getTodoList]);
 
   const inputEl = useRef(null);
 
