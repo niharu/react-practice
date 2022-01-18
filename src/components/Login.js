@@ -4,7 +4,7 @@ import { useDisclosure } from "@chakra-ui/react"
 
 import { SignInScreen } from "./SignInScreen";
 
-import { firebase } from "firebase/compat/app";
+import firebase from "firebase/compat/app";
 import { firebaseConfig } from "../config/config"
 import 'firebase/compat/auth';
 
