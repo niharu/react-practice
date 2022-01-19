@@ -8,6 +8,13 @@ import firebase from "firebase/compat/app";
 import { firebaseConfig } from "../config/config"
 import 'firebase/compat/auth';
 
+import {
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem
+} from '@chakra-ui/react'
+
 const uiConfig = {
   signInFlow: 'popup',
   signInSuccessUrl: "/",
@@ -36,8 +43,17 @@ export const Login = ({ loading, isSignedIn, user }) => {
             <>
               <Flex>
                 <Center>
-                  <Text>{user !== null && user.displayName}</Text>
-                  <Button ml="3" colorScheme="blue" onClick={logout}>ログアウト</Button>
+                  <Text mr="3">{user !== null && user.displayName}</Text>
+                  {/* <Button ml="3" colorScheme="blue" onClick={logout}>ログアウト</Button> */}
+                  <Menu>
+                    <MenuButton colorScheme="gray" as={Button} >
+                      メニュー
+                    </MenuButton>
+                    <MenuList>
+                      <MenuItem>設定</MenuItem>
+                      <MenuItem onClick={logout}>ログアウト</MenuItem>
+                    </MenuList>
+                  </Menu>
                 </Center>
               </Flex>
             </>
