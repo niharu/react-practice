@@ -9,8 +9,13 @@ import { SignInScreen } from "./SignInScreen";
 import { Login } from "./Login";
 
 import { useEffect } from "react";
+import { useState } from "react";
 import { useTodo } from "../hooks/useTodo";
 import { useAuthState } from "../hooks/useAuthState";
+import { Clips } from "./Clips";
+import { useClip } from "../hooks/useClip";
+import { AddClip } from "./AddClips";
+import { IncrementalSearch } from "./IncrementalSearch";
 
 function App() {
   const {
@@ -22,13 +27,34 @@ function App() {
     updateTodoContent
   } = useTodo();
 
+  const {
+    clips,
+    searchClips,
+    addClip,
+    filterClips,
+    filteredClips
+  } = useClip();
+
+  const [searchWord, setSearchWord] = useState('');
+
   const { loading, isSignedIn, user } = useAuthState();
 
+  const handleChangeSearchWord = (e) => {
+    setSearchWord(e.target.value);
+    filterClips(e.target.value);
+  };
+
+  const category = "Linux";
+
   useEffect(() => {
-    if (user!==null) {
+    if (user !== null) {
       getTodoList(user);
     }
   }, [user, getTodoList]);
+
+  useEffect(() => {
+    searchClips(category);
+  }, [category, searchClips]);
 
   const inputEl = useRef(null);
 
@@ -39,36 +65,34 @@ function App() {
     inputEl.current.value = "";
   };
 
+  console.log("clips:", clips);
+
   return (
     <Container p={{ base: "4", md: "6" }} maxWidth="3xl">
+
       <Flex>
         <Box>
           <TodoTitle title="Todoリスト" as="h1"
             fontSize={{ base: "2xl", md: "3xl" }} />
         </Box>
         <Spacer />
-        <Box>
-          <Login loading={loading} isSignedIn={isSignedIn} user={user} />
-        </Box>
+        <IncrementalSearch
+          placeholder="検索"
+          searchWord={searchWord}
+          handleChangeSearchWord={handleChangeSearchWord}
+        />
+        <Spacer />
+        {isSignedIn ?
+          <AddClip addClip={addClip} />
+          :
+          <Box>
+            <Login loading={loading} isSignedIn={isSignedIn} user={user} />
+          </Box>
+        }
       </Flex>
 
-      {isSignedIn &&
-        <>
-          <TodoAdd
-            placeholder="Add Todo"
-            leftIcon={<AddIcon />}
-            inputEl={inputEl}
-            handleAddTodoListItem={handleAddTodoListItem}
-            buttonText="Todoを追加" />
-          <TodoList
-            todoList={todoList}
-            toggleTodoListItemStatus={toggleTodoListItemStatus}
-            deleteTodoListItem={deleteTodoListItem}
-            updateTodoContent={updateTodoContent}
-          />
-        </>
+      <Clips clips={filteredClips} />
 
-      }
       <SignInScreen />
     </Container>
   );
